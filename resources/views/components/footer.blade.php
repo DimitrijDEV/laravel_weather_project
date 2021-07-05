@@ -1,3 +1,5 @@
-<div>
-    <!-- Simplicity is an acquired taste. - Katharine Gerould -->
-</div>
+<footer class="footer">
+    <div class="container">
+
+    </div>
+</footer>
