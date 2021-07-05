@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email" value="{{ old('email') }}">
+                placeholder="Enter email" name="email" value="{{ old('email') }}">
 
             @error('email')
                 <p class="pl-2 pt-1 text-danger">{{ $message }}</p>
@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
 
             @error('password')
                 <p class="pl-2 pt-1 text-danger">{{ $message }}</p>

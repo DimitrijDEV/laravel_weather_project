@@ -2,10 +2,12 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
+
     /**
      * Create a new component instance.
      *
@@ -23,6 +25,8 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.header');
+        $user = Auth::user();
+
+        return view('components.header', ["user" => $user]);
     }
 }

@@ -8,10 +8,10 @@
         @method('post')
         <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 placeholder="Enter your name" name="username" value="{{ old('username') }}">
 
-            @error('name')
+            @error('username')
                 <p class="pl-2 pt-1 text-danger">{{ $message }}</p>
             @enderror
         </div>
@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email" name="email" {{ old('email') }}>
+                placeholder="Enter email" name="email" value="{{ old('email') }}">
 
             @error('email')
                 <p class="pl-2 pt-1 text-danger">{{ $message }}</p>
@@ -38,7 +38,11 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Repeat password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat password"
-                name="repeat-password">
+                name="password_confirmation">
+
+            @error('password_confirmation')
+                <p class="pl-2 pt-1 text-danger">{{ $message }}</p>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
