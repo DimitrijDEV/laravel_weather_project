@@ -20,16 +20,25 @@
          @endguest
 
          @auth
-             <nav class="navbar navbar-expand-lg navbar-light">
+             <nav class="navbar navbar-expand-lg navbar-dark">
                  <a class="navbar-brand text-light" href="{{ route('home') }}">{{ env('APP_NAME') }}</a>
 
                  <div class="navbar navbar-dark ml-auto">
-                     <ul class="navbar-nav">
-                         <p class="text-light my-auto mr-4">{{ ucfirst($user->name) ?? 'None' }}</p>
-                         <li class="nav-item">
-                             <a class="nav-link" href="{{ route('user.logout') }}">Logout</a>
-                         </li>
-                     </ul>
+
+                     <p class="text-light my-auto mr-4">{{ ucfirst($user->name) ?? 'None' }}</p>
+
+                     <div class="btn-group">
+                         <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown"
+                             aria-haspopup="true" aria-expanded="false">
+                             <i class="bi bi-gear-fill"></i>
+                         </button>
+                         <div class="dropdown-menu dropdown-menu-right">
+                             <button class="dropdown-item" type="button">
+                                 <a href="{{ route('user.logout') }}">Logout</a>
+                             </button>
+                         </div>
+                     </div>
+
                  </div>
              </nav>
          @endauth

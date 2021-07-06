@@ -38,4 +38,5 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::post('home/cities', [HomeController::class, 'cities'])->name('cities');
 });

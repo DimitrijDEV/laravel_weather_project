@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center mt-5">Register Page</h1>
+    <h1 class="text-center mt-5 text-light">Register Page</h1>
 
     <form action="{{ route('auth.create-user') }}" method="POST" class="mx-auto" style="width:500px;">
         @csrf

@@ -21,8 +21,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
-    <div id="app">
+<body style="background: linear-gradient(to right,#0f0c29, #302b63, #24243e);">
+    <div id="app" >
 
         <x-header />
 
