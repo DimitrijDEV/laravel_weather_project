@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repository\Cities;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -13,8 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         return view('profile.home', [
-            'cities' => [], 
-            'city' => null, 
+            'cities' => [],
+            'city' => null,
             'weather' => null
         ]);
     }
@@ -22,7 +20,8 @@ class HomeController extends Controller
 
     public function cities(Request $request)
     {
-        $request->validate(['city' => 'required|min:3|max:50']);
+        $request->validate(['city' => 'bail|required|min:3|max:50']);
+
         $cities = Cities::find($request->city);
 
         return  view('profile.home', [
@@ -38,8 +37,7 @@ class HomeController extends Controller
         $city = Cities::get($id);
         $weatherJson = file_get_contents($this->getApiUrl($city));
         $weather = json_decode($weatherJson);
-        
-        // dd($weather);
+
         return view('profile.home', [
             'cities' => [],
             'city' => $city,
