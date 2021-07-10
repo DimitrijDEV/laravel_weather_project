@@ -2,55 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\Cities;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-    public $citiesForSelection = [];
-
-
-    public function extract_cities()
-    {
-        ini_set('memory_limit', '500M');
-
-        $path = storage_path() . "\json\cities.json";
-        session(['cities' => json_decode(file_get_contents($path), true)]);
-
-        dd(session()->has('cities'));
-    }
-
 
     public function index()
     {
-        return view('profile.home', ['cities' => []]);
+        return view('profile.home', ['cities' => [], 'city' => null, 'weather' => null]);
     }
 
 
     public function cities(Request $request)
     {
-        $validated = $request->validate(['city' => 'required|min:3|max:50']);
+        $request->validate(['city' => 'required|min:3|max:50']);
+        $cities = Cities::find($request->city);
 
-
-        $this->extract_cities($request);
-        if ($request->session()->has('cities')) {
-            $this->extract_cities($request);
-        }
-
-        // if ($validated) {
-        //     $cities = $request->session()->get('cities');
-
-        //     foreach ($cities as $city) {
-        //         if (Str::contains($city['name'], $request->city)) {
-        //             array_push($this->citiesForSelection, $city);
-        //         }
-        //     }
-        // }
-
-        // return  view('profile.home', ['cities' => $this->citiesForSelection]);
+        return  view('profile.home', [
+            'cities' => $cities,
+            'city' =>  null,
+            'weather' => null
+        ]);
     }
 
     public function weather(Request $request)
     {
+        $id = (int) $request->id;
+        $city = Cities::get($id);
+        $weatherJson = file_get_contents($this->getApiUrl($city));
+        $weather = json_decode($weatherJson);
+       
+
+        return view('profile.home', [
+            'cities' => [],
+            'city' => $city,
+            'weather' => $weather
+        ]);
+    }
+
+    public function getApiUrl($city)
+    {
+        $location = 'https://api.openweathermap.org/data/2.5/onecall';
+        $url = $location . '?lat=' . $city['coord']['lat'] . '&lon=' . $city['coord']['lon'] . '&exclude=' . '&appid=' . env('OWM_KEY');
+        return $url;
     }
 }

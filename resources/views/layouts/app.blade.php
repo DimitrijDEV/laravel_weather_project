@@ -22,7 +22,7 @@
 </head>
 
 <body style="background: linear-gradient(to right,#0f0c29, #302b63, #24243e);">
-    <div id="app" >
+    <div id="app">
 
         <x-header />
 
@@ -36,5 +36,11 @@
 
     </div>
 </body>
+
+<script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
+<script type="text/javascript">
+ 
+</script>
+
 
 </html>

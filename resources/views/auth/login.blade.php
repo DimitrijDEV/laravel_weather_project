@@ -7,7 +7,7 @@
         @csrf
         @method('post')
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label class="text-light" for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 placeholder="Enter email" name="email" value="{{ old('email') }}">
 
@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label class="text-light" for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
 
             @error('password')
