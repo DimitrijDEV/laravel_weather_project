@@ -18,7 +18,8 @@ A simple weather app built with laravel and bootstrap, using the Open Weather Ma
 - Get daily and coming weather forecasts
 - Get weather by current position or any given city
 - Change temperature unit and API key
-- Settings are stored in local storage
+- Settings are stored in env.example
+- The list of cities are stored in storage folder
 - Responsive
 
 ## Prerequisites
