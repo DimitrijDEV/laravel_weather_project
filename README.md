@@ -11,7 +11,7 @@
 
 A simple weather app built with laravel and bootstrap, using the Open Weather Map API.
 
-![alt text](/DimitrijDEV/laravel_weather_project/blob/main/raw/weather.JPG?raw=true)
+![alt text](https://github.com/DimitrijDEV/laravel_weather_project/blob/main/raw/weather.JPG?raw=true)
 
 ## Features
 
