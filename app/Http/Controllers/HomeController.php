@@ -12,7 +12,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('profile.home', ['cities' => [], 'city' => null, 'weather' => null]);
+        return view('profile.home', [
+            'cities' => [], 
+            'city' => null, 
+            'weather' => null
+        ]);
     }
 
 
@@ -34,8 +38,8 @@ class HomeController extends Controller
         $city = Cities::get($id);
         $weatherJson = file_get_contents($this->getApiUrl($city));
         $weather = json_decode($weatherJson);
-       
-
+        
+        // dd($weather);
         return view('profile.home', [
             'cities' => [],
             'city' => $city,

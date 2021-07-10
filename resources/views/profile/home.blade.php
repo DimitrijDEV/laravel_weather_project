@@ -36,10 +36,41 @@
 
     @if ($city !== null && $weather !== null)
         <div class="weather-info text-center text-light py-3 mt-4" style="background-color: #58557d">
-            <h2 class="mb-2 text-light">{{  $city['name'] }}</h2>
-            <h2 class="mb-2 text-ligt"></h2>
-            <pre class="text-light">{{ var_dump($weather) }}</pre>
+            <h2 class="mb-2 text-light">{{ $city['name'] }}, {{ $city['country'] }}</h2>
+            <h1 class="my-3 text-ligt">{{ (int) ($weather->current->temp - 273.15) }} <span>&#8451;</span></h1>
+            <div id="icon">
+                <img id="wicon" style="width: 70px; height: 70px"
+                    src="{{ 'http://openweathermap.org/img/w/' . $weather->current->weather[0]->icon . '.png' }}"
+                    alt="Weather icon" />
+            </div>
+            <h3>{{ $weather->current->weather[0]->main }}</h3>
+            <h5 class="my-3">{{ date('l, h:i A', $weather->current->dt) }}</h5>
+
+            <div class="d-flex justify-content-center">
+                <p class="mr-4">Wind {{ $weather->current->wind_speed }} m/s</p>
+                <p>Pressure {{ $weather->current->pressure }} hPa</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p class="mr-4">Humidity {{ $weather->current->humidity }}%</p>
+                <p>Cloudness {{ $weather->current->clouds }}%</p>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <x-weather-card :weather="$weather->daily[1]" />
+            </div>
+            <div class="col">
+                <x-weather-card :weather="$weather->daily[2]" />
+            </div>
+            <div class="col">
+                <x-weather-card :weather="$weather->daily[3]" />
+            </div>
+            <div class="col">
+                <x-weather-card :weather="$weather->daily[4]" />
+            </div>
+        </div>
+
     @endif
 
     <script>
