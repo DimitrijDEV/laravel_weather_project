@@ -33,16 +33,25 @@ class HomeController extends Controller
 
     public function weather(Request $request)
     {
-        $id = (int) $request->id;
-        $city = Cities::get($id);
-        $weatherJson = file_get_contents($this->getApiUrl($city));
-        $weather = json_decode($weatherJson);
+        $validated = $request->validate(['id' => 'required|integer']);
 
-        return view('profile.home', [
-            'cities' => [],
-            'city' => $city,
-            'weather' => $weather
-        ]);
+        if ($validated) {
+            $id = (int) $validated['id'];
+            $city = Cities::get($id);
+      
+            if (isset($city)) {
+                $weatherJson = file_get_contents($this->getApiUrl($city));
+                $weather = json_decode($weatherJson);
+
+                return view('profile.home', [
+                    'cities' => [],
+                    'city' => $city,
+                    'weather' => $weather
+                ]);
+            }
+        }
+
+        abort(404);
     }
 
     public function getApiUrl($city)

@@ -17,18 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Controllers\WelcomeController::class)->name('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', App\Http\Controllers\WelcomeController::class)->name('welcome');
 
-Route::name('auth.')->group(function () {
-    //Return a login and register page
-    Route::get('login', [LoginController::class, 'index'])->name('login');
-    Route::get('register', [RegisterController::class, 'index'])->name('register');
+    Route::name('auth.')->group(function () {
+        //Return a login and register page
+        Route::get('login', [LoginController::class, 'index'])->name('login');
+        Route::get('register', [RegisterController::class, 'index'])->name('register');
 
-    //Check user's credentials in the database
-    Route::post('login/check', [LoginController::class, 'login'])->name('check-user');
+        //Check user's credentials in the database
+        Route::post('login/check', [LoginController::class, 'login'])->name('check-user');
 
-    //Create a new user
-    Route::post('register/create', [RegisterController::class, 'register'])->name('create-user');
+        //Create a new user
+        Route::post('register/create', [RegisterController::class, 'register'])->name('create-user');
+    });
 });
 
 Route::middleware('auth')->group(function () {
@@ -37,7 +39,12 @@ Route::middleware('auth')->group(function () {
         Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
     });
 
-    Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('home/weather', [HomeController::class, 'weather'])->name('weather');
-    Route::get('home/cities', [HomeController::class, 'cities'])->name('cities');
+    Route::get('home', [HomeController::class, 'index'])
+        ->name('home');
+
+    Route::get('home/weather/', [HomeController::class, 'weather'])
+        ->name('weather');
+
+    Route::get('home/cities/', [HomeController::class, 'cities'])
+        ->name('cities');
 });

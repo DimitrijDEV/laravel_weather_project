@@ -53,7 +53,11 @@
                 <x-weather-card :weather="$weather->daily[4]" />
             </div>
         </div>
-
+    @elseif (sizeof($cities) === 0)
+        <div class="weather-info text-center text-light py-3 mt-4" style="background-color: #58557d">
+            <i class="bi bi-cloud-sun" style="font-size: 120px"></i>
+            <h5>You need to find a city if you wish to know a weather!</h5>
+        </div>
     @endif
 
     <script>
