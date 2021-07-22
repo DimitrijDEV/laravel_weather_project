@@ -38,23 +38,25 @@ class HomeController extends Controller
         if ($validated) {
             $id = (int) $validated['id'];
             $city = Cities::get($id);
-      
-            if (isset($city)) {
-                $weatherJson = file_get_contents($this->getApiUrl($city));
-                $weather = json_decode($weatherJson);
+            $weather = $this->getWeatherData($city);
 
-                return view('profile.home', [
-                    'cities' => [],
-                    'city' => $city,
-                    'weather' => $weather
-                ]);
-            }
+            return view('profile.home', [
+                'cities' => [],
+                'city' => $city,
+                'weather' => $weather
+            ]);
         }
 
         abort(404);
     }
 
-    public function getApiUrl($city)
+    private function getWeatherData($city)
+    {
+        $weatherJson = file_get_contents($this->getApiUrl($city));
+        return json_decode($weatherJson);
+    }
+
+    private function getApiUrl($city)
     {
         $location = 'https://api.openweathermap.org/data/2.5/onecall';
         $url = $location . '?lat=' . $city['coord']['lat'] . '&lon=' . $city['coord']['lon'] . '&exclude=' . '&appid=' . env('OWM_KEY');

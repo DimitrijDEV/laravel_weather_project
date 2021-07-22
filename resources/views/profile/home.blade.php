@@ -2,8 +2,6 @@
 
 @section('content')
     <form action="{{ route('cities') }}" method="get" class="mt-5" id="search-city">
-        @csrf
-        @method('get')
         <div class="input-group mb-2">
             <input type="text" class="form-control" placeholder="Search for a city" aria-label="Search for a city"
                 aria-describedby="basic-addon2" name="city" value={{ old('city') }}>
@@ -22,8 +20,6 @@
 
         @if (sizeof($cities) > 0)
             <form id="select-city" action="{{ route('weather') }}" class="my-3 ml-auto" method="get">
-                @csrf
-                @method('get')
                 <select name="id" class="form-select" aria-label="Default select example" onchange="getWeather(event)">
                     <option selected>Select a city</option>
                     @foreach ($cities as $city)
