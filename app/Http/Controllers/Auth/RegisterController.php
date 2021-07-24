@@ -44,10 +44,4 @@ class RegisterController extends Controller
     }
 }
 
-// $hashed = Hash::make($request->password);
-
-//             if (Hash::check('123321', $hashed)) {
-//                 dd($hashed);
-//             }else{
-//                 dd("Doesn't match");
-//             }
+ 
